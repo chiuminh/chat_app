@@ -1,0 +1,21 @@
+extends master 
+block content 
+    a(href="/register").switch
+        | Sign Up
+    h1.title Đăng nhập
+    form#login.form(method="POST" action="/login")
+        // add class: invalid if error else valid
+        -var invalidEmail = errorMessages && errorMessages['email'] ? 'invalid':''
+        .input-group(class=invalidEmail)
+            label(for='email')
+                // invalid message
+                span.message #{errorMessages ? errorMessages['email'] : 'Email'}
+            input#emailLogin.input-field(type='text', name='email',value=email, placeholder='Eg: minhchiu@gmail.com')
+
+        -var invalidPass = errorMessages && errorMessages['password'] ? 'invalid':''
+        .input-group(class=invalidPass)
+            label(for='password')
+                span.message #{errorMessages ? errorMessages['password'] : 'Password'}
+            input#passwordLogin.input-field(type='password', name='password', value=password, placeholder='Enter password')
+        a.forgot-password(href='/forgot-password', onclick='openForgotPassword()') Forgot your password?
+        button.submit-btn Login

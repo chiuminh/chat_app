@@ -1,0 +1,26 @@
+extends master 
+block content 
+    a(href="/login").switch
+        | Sign In
+    h1.title Đăng Ký
+    form#login.form(method="POST")
+        -var invalidEmail = errorMessages && errorMessages['email'] ? 'invalid':''
+        -var invalidLastname = errorMessages && errorMessages['lastname'] ? 'invalid':''
+        -var invalidFirstname = errorMessages && errorMessages['firstname'] ? 'invalid':''
+        -var invalidPassword = errorMessages && errorMessages['password'] ? 'invalid':''
+        .input-group-row
+            .input-group(class=invalidFirstname)
+                label(for='firstname') First Name: 
+                input#firstname.input-field(type='text', value=firstname, name='firstname', placeholder='Eg: minh')
+            .input-group(class=invalidLastname)
+                label(for='lastname') Last Name: 
+                input#lastname.input-field(type='text', value=lastname, name='lastname', placeholder='Eg: chiu')
+        .input-group(class=invalidEmail)
+            label(for='email') 
+                span.message #{errorMessages ? errorMessages['email'] : 'Email'}
+            input.input-field(type='email', name='email', value=email, id='', emailregister='', placeholder='Eg: minhchiu@gmail.com')
+        .input-group(class=invalidPassword)
+            label(for='password')  
+                span.message #{errorMessages ? errorMessages['password'] : 'Password'}
+            input#passwordRegister.input-field(type='password', value=password, name='password', placeholder='Enter password')
+        button.submit-btn Register
