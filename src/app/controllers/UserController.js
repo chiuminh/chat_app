@@ -1,4 +1,5 @@
 import validate, { emailSchema, registerSchema } from "../../validate";
+import mailer from "../../config/mailer";
 import User from "../models/User";
 import bcrypt from "bcrypt";
 class UserController {
@@ -38,7 +39,14 @@ class UserController {
       await User.createNew(item);
 
       // send email
+      let htmlContent = `
+            <h2>Bạn nhập được email này vì đã đăng ký tài khoản trên ứng dụng awesome chat.</h2>
+            <h3>Vui lòng click vào liên kết bên dưới để xác nhận kích hoạt tài khoản.</h3>
+            <h3><a href="${linkVerify}" target="_blank">${linkVerify}</a></h3>
+            <h4>Nếu tin rằng email này là nhầm lẫn, hãy bỏ qua nó. Trân trọng</h4>
+        `;
 
+      await mailer(item.local.email, "Register Chat App");
       // verify email
 
       res.redirect("/");

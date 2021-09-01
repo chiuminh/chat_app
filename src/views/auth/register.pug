@@ -1,9 +1,13 @@
-extends master 
+extends ../layout/login-layout 
 block content 
     a(href="/login").switch
         | Sign In
     h1.title Đăng Ký
-    form#login.form(method="POST")
+    if errors.length
+        .alert.alert-danger
+            span.message= errors
+            i.fas.fa-times  
+    form#register.form(method="POST")
         -var invalidEmail = errorMessages && errorMessages['email'] ? 'invalid':''
         -var invalidLastname = errorMessages && errorMessages['lastname'] ? 'invalid':''
         -var invalidFirstname = errorMessages && errorMessages['firstname'] ? 'invalid':''
