@@ -1,0 +1,7 @@
+extends ../layout/main-layout 
+block content
+    if success.length
+        .alert.alert-success.master-success-message
+            span.message= success
+    h1 #{info ? info : 'NoInfo'}
+    a(href="/logout") Đăng xuất

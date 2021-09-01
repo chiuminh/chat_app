@@ -1,9 +1,17 @@
-extends master 
+extends ../layout/login-layout 
 block content 
     a(href="/register").switch
         | Sign Up
     h1.title Đăng nhập
-    form#login.form(method="POST" action="/login")
+    if errors.length
+        .alert.alert-danger
+            span.message= errors
+            i.fas.fa-times  
+    if success.length
+        .alert.alert-success
+            span.message= success
+            i.fas.fa-times  
+    form#login.form(method="POST")
         // add class: invalid if error else valid
         -var invalidEmail = errorMessages && errorMessages['email'] ? 'invalid':''
         .input-group(class=invalidEmail)

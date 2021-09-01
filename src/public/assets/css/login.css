@@ -88,7 +88,7 @@ html {
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 60px;
+  bottom: 46px;
 }
 .social-icons a {
   width: 34px;
@@ -123,7 +123,7 @@ html {
 .form {
   position: absolute;
   width: 100%;
-  padding: 40px;
+  padding: 20px;
   transition: 0.4s;
 }
 
@@ -157,8 +157,15 @@ html {
 .invalid .message {
   font-size: 14px;
 }
-.d-none {
+.hide {
   display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.show {
+  display: none;
+  opacity: 100%;
+  visibility: visible;
 }
 .input-field {
   font-size: 15px;
@@ -188,10 +195,12 @@ html {
 }
 
 #register {
-  transform: translateX(450px);
+  /* transform: translateX(450px); */
+  padding-top: 20px;
 }
+
 #forgotPassword {
-  transform: translateX(450px);
+  /* transform: translateX(450px); */
 }
 label {
   color: #5f5f5f;
@@ -200,10 +209,10 @@ label {
 .forgot-password {
   color: blue;
   display: inline-block;
-  margin: 8px 0;
   font-size: 14px;
   text-decoration: none;
   transition: 0.4s;
+  transform: translateY(-18px);
 }
 .forgot-password:hover {
   text-decoration: underline;
@@ -220,4 +229,70 @@ label {
   padding-top: 20px;
   color: rgb(49 255 0);
   font-size: 30px;
+  margin-bottom: 4px;
 }
+/* ********************* ALERT **************************** */
+
+.alert {
+  text-align: center;
+  margin: 0px 30px;
+  border-radius: 4px;
+  padding: 4px;
+  margin-top: 8px;
+  position: relative;
+}
+
+.alert-success {
+  color: #155724;
+  background: #d4edda;
+  border: #b5dbbe;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert .message {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.alert i {
+  position: absolute;
+  right: -9px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 14px;
+  background: #ebe3e3;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  font-size: 12px;
+  color: white;
+}
+
+.alert.alert-danger i {
+  transition: 0.4s;
+}
+
+.alert.alert-danger i:hover {
+  color: #ee6e7b;
+}
+
+.alert.alert-success i {
+  transition: 0.4s;
+}
+
+.alert.alert-success i:hover {
+  color: #73d68a;
+}
+.master-success-message {
+  display: none;
+}
+/* **************************************************** */

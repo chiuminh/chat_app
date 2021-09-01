@@ -7,13 +7,9 @@ html(lang="en")
         title SignIn - SignUp
         link(rel='stylesheet', href='assets/css/login.css')
         link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css', rel='stylesheet')
+        link(rel='stylesheet', href='//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css')
     body 
-        .hero
-            .form-box
-                block content 
-                .social-icons
-                    a#login-facebook(href='/auth/facebook')
-                        i.fab.fa-facebook-f
-                    a#login-google(href='/auth/google')
-                        i.fab.fa-google-plus-g
-        script(src="js/login.js") 
+        block content 
+        
+        script(src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js")
+        script(src="js/mainConfig.js") 

@@ -1,6 +1,9 @@
 class HomeController {
   getHome(req, res) {
-    res.send("home page");
+    res.render("main/master", {
+      success: req.flash("success"),
+      errors: req.flash("errors"),
+    });
   }
 }
 export default new HomeController();
