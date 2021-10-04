@@ -4,9 +4,8 @@ block content
         | Sign In
     h1.title Đăng Ký
     if errors.length
-        .alert.alert-danger
-            span.message= errors
-            i.fas.fa-times  
+        +alertError(errors)
+
     form#register.form(method="POST")
         -var invalidEmail = errorMessages && errorMessages['email'] ? 'invalid':''
         -var invalidLastname = errorMessages && errorMessages['lastname'] ? 'invalid':''

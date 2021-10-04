@@ -1,17 +1,34 @@
-import { transErrors, tranSuccess } from "../../../lang/vi";
-import validate, {
-  loginSchema,
-  emailSchema,
-  registerSchema,
-} from "../../validate";
+import { tranSuccess } from "../../../lang/vi";
 import AuthService from "../services/AuthService";
+import { validate, registerSchema } from "../../validate";
 
-class AuthController {
+class AuthCtrl {
+
+  // [POST] /register
   async postRegister(req, res) {
+    // Validate data from clients
+    const { error } = validate(req.body, registerSchema);
+    if (error) {
+      let payload = req.body;
+      payload.errorMessages = {};
+
+      for (const err of error.details)
+        payload.errorMessages[err.path[0]] = err.message;
+
+      // render register page and messsages error
+      return res.render("auth/register", {
+        ...payload,
+        success: req.flash("success"),
+        errors: req.flash("errors"),
+      });
+    }
+
     try {
       const { firstname, lastname, email, password } = req.body;
       let host = req.get("host");
       const protocol = req.protocol;
+
+      // Register account
       const message = await AuthService.register(
         firstname,
         lastname,
@@ -27,14 +44,19 @@ class AuthController {
       return res.redirect("/register");
     }
   }
-  async getLogout(req, res) {
+
+  // [GET] /logout
+  async logout(req, res) {
     req.logout(); // remove passport on session
 
     req.flash("success", tranSuccess.logout_success);
     res.redirect("/login");
   }
+
+  // [GET] /verify/:token
   async verifyToken(req, res) {
     try {
+      // check account verification
       let verifySuccess = await AuthService.verifyAccount(req.params.token);
       req.flash("success", verifySuccess);
       res.redirect("/login");
@@ -44,45 +66,19 @@ class AuthController {
     }
   }
 
-  async getLogin(req, res) {
+  // [GET] /login
+  async getLoginPage(req, res) {
     res.render("auth/login", {
       errors: req.flash("errors"),
       success: req.flash("success"),
     });
   }
-  async postLogin(req, res) {
-    const { error } = validate(req.body, loginSchema);
-    if (error) {
-      let playload = req.body;
-      playload.errorMessages = {};
-
-      for (const err of error.details)
-        playload.errorMessages[err.path[0]] = err.message;
-
-      return res.render("auth/login", playload);
-    }
-    res.redirect("/");
-  }
-
-  async postForgotPassword(req, res) {
-    const { error } = validate(req.body, emailSchema);
-    if (error) {
-      let playload = req.body;
-      playload.errorMessages = {
-        email: error.details[0].message,
-      };
-      return res.render("auth/forgot_password", playload);
-    }
-    res.redirect("/forgot_password");
-  }
+  // [GET] /register
   async getRegister(req, res) {
     res.render("auth/register", {
       success: req.flash("success"),
       errors: req.flash("errors"),
     });
   }
-  async getForgotPassword(req, res) {
-    res.render("auth/forgot_password");
-  }
 }
-export default new AuthController();
+export default new AuthCtrl();

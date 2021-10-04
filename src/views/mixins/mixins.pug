@@ -1,0 +1,56 @@
+mixin createPostForm(userLoggedIn)
+    .post__form-container
+        .user__image-container
+            img(src=`/assets/images/users/${userLoggedIn.profilePic}`, alt="User's profile picture")
+        .textarea__container
+            textarea#postTextarea(placeholder="What's happending?")
+            .buttons__container
+                button#submitPostButton(disabled=true) Post
+
+
+mixin createReplyModal(userLoggedIn)
+    #replyModal.modal.close-reply-modal.fade(tabindex='-1', aria-labelledby='replyModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#replyModalLabel.modal-title Reply
+                    button.close-reply-modal.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body.p-0
+                    #originalPostContainer
+                    .post__form-container
+                        .user__image-container
+                            img(src=`/assets/images/users/${userLoggedIn.profilePic}`, alt="User's profile picture")
+                        .textarea__container
+                            textarea#replyTextarea(placeholder="What's happending?")
+                .modal-footer
+                    button.close-reply-modal.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
+                    button#submitReplyButton.btn.btn-primary(type='button', disabled=true) Reply
+
+
+mixin createDeletePostModal()
+    #deletePostModal.modal.fade(tabindex='-1', aria-labelledby='deletePostModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#deletePostModalLabel.modal-title Xóa bài viết?
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    span Bạn có chắc chắn muốn xóa bài viết này không?
+                .modal-footer
+                    button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
+                    button#submitDeletePost.btn.btn-primary(type='button') Xóa
+
+
+mixin createPostModal(userLoggedIn)
+    +createReplyModal(userLoggedIn)
+    +createDeletePostModal()
+
+mixin createFollowButton(user, isFollowing)
+    -var text = isFollowing ? "Following" : "Folllow"
+    -var buttonClass = isFollowing ? "follow-button following" : "follow-button"
+    button(class=buttonClass, data-user=user._id)= text 
+
+mixin createTab(name, href, isSelected)
+    -var className = isSelected ? "tab active" : "tab"
+    a(href= href, class= className) 
+        span= name

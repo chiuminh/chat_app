@@ -1,24 +1,27 @@
 # Config app environment variable
-export APP_PORT=8018
-export APP_HOST=localhost
+export APP_PORT=***
+export APP_HOST=***
 
 # Config database environment variable
-export DB_CONNECTION=mongodb
-export DB_HOST=localhost
-export DB_PORT=27017
-export DB_NAME=awesome_chat
+# export DB_CONNECTION=***
+# export DB_HOST=***
+# export DB_PORT=***
+export DB_CONNECTION=***
+export DB_HOST=***
+export DB_PORT=***
+export DB_NAME=***
 export DB_USER=***
 export DB_PASSWORD=***
 
 # config session
-export SESSION_KEY=minhchiu
-export SESSION_SECRET=minhiu
+export SESSION_KEY=***
+export SESSION_SECRET=***
 
 # Config admin use account
-export MAIL_USER=youremail@gmail.com
-export MAIL_PASSWORD=yourpassword
-export MAIL_HOST=smtp.gmail.com
-export MAIL_PORT=587
+export MAIL_USER=***
+export MAIL_PASSWORD=***
+export MAIL_HOST=***
+export MAIL_PORT=***
 
 # Config facebook login app
 export FB_APP_ID=***
@@ -29,3 +32,6 @@ export FB_CALLBACK_URL=***
 export GG_APP_ID=***
 export GG_APP_SECRET=***
 export GG_CALLBACK_URL=***
+
+# Config jsonwebtoken
+export JWT_SECRET=***

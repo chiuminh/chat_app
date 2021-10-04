@@ -1,38 +1,53 @@
 import bcrypt from "bcrypt";
 import mongoose, { Schema } from "mongoose";
-const UserSchema = new Schema({
-  displayname: { type: String, trim: true, min: 2, max: 60, required: true },
-  firstname: { type: String, trim: true, min: 2, max: 10, required: true },
-  lastname: { type: String, trim: true, min: 2, max: 50, required: true },
-  gender: { type: String, default: "male" },
-  address: { type: String, default: null },
-  role: { type: String, default: "user" },
-  profilePic: { type: String, default: "profilePic-default.jpg" },
-  local: {
-    email: {
+const UserSchema = new Schema(
+  {
+    firstname: { type: String, trim: true, min: 2, max: 10, required: true },
+    lastname: { type: String, trim: true, min: 2, max: 50, required: true },
+    username: {
       type: String,
       trim: true,
+      min: 2,
       max: 50,
       lowercase: true,
+      unique: true,
+      required: true,
     },
-    password: { type: String, min: 6, max: 50 },
-    isActive: { type: Boolean, default: false },
-    verifyToken: String,
+    gender: { type: String, default: "male" },
+    address: { type: String, default: null },
+    role: { type: String, default: "user" },
+    profilePic: { type: String, default: "profilePic-default.jpeg" },
+    likes: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    retweets: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    local: {
+      email: {
+        type: String,
+        trim: true,
+        max: 50,
+        lowercase: true,
+      },
+      password: { type: String, min: 6, max: 50 },
+      isActive: { type: Boolean, default: false },
+      verifyToken: String,
+    },
+    facebook: {
+      uid: String,
+      token: String,
+      email: { type: String, trim: true, lowerCase: true },
+    },
+    google: {
+      uid: String,
+      token: String,
+      email: { type: String, trim: true, lowerCase: true },
+    },
+    deletedAt: { type: Date, default: null },
   },
-  facebook: {
-    uid: String,
-    token: String,
-    email: { type: String, trim: true, lowerCase: true },
-  },
-  google: {
-    uid: String,
-    token: String,
-    email: { type: String, trim: true, lowerCase: true },
-  },
-  createdAt: { type: Number, default: Date.now },
-  updatedAt: { type: Number, default: Date.now },
-  deletedAt: { type: Number, default: null },
-});
+  {
+    timestamps: true,
+  }
+);
 
 UserSchema.statics = {
   /**
@@ -42,8 +57,31 @@ UserSchema.statics = {
   createNew(item) {
     return this.create(item);
   },
-  findByUserId(id) {
-    return this.findById(id).select("-password").exec();
+  /**
+   * Get user reference in other collections
+   * @param {object} item
+   * @param {string} field: column
+   */
+  getUserRef(item, field) {
+    return this.populate(item, {
+      path: field,
+      select: "-local.password",
+    });
+  },
+  findUserNormalById(userId) {
+    return this.findById(userId).select("-local.password").exec();
+  },
+  findByUserIdAndUpdate(userId, item) {
+    return this.findByIdAndUpdate(userId, item, { new: true })
+      .select("-local.password")
+      .exec();
+  },
+  /**
+   * Find user by username
+   * @param {string} username
+   */
+  findByUsername(username) {
+    return this.findOne({ username }).exec();
   },
   /**
    * Find user by email
@@ -58,8 +96,8 @@ UserSchema.statics = {
   findByGoogleUid(uid) {
     return this.findOne({ "google.uid": uid }).exec();
   },
-  removeById(id) {
-    return this.findByIdAndRemove(id).exec();
+  removeByUserId(userId) {
+    return this.findByIdAndRemove(userId).exec();
   },
   verifyToken(token) {
     return this.findOneAndUpdate(

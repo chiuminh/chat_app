@@ -1,6 +1,7 @@
 import passport from "passport";
 import passportLocal from "passport-local";
 import { transErrors, tranSuccess } from "../../../../lang/vi";
+import { validate, loginSchema } from "../../../validate";
 import User from "../../models/User";
 let LocalStrategy = passportLocal.Strategy;
 
@@ -46,10 +47,11 @@ const initPassportLocal = () => {
               req.flash("errors", transErrors.login_failed)
             );
           }
+          let displayname = user.firstname + " " + user.lastname;
           return done(
             null,
             user,
-            req.flash("success", tranSuccess.login_success(user.displayname))
+            req.flash("success", tranSuccess.login_success(displayname))
           );
         } catch (error) {
           return done(
@@ -68,7 +70,7 @@ const initPassportLocal = () => {
   });
   // Save req.user
   passport.deserializeUser((id, done) => {
-    User.findByUserId(id)
+    User.findUserNormalById(id)
       .then(user => done(null, user))
       .catch(error => done(error, null));
   });

@@ -21,18 +21,19 @@ const initPassportFacebook = () => {
       async (req, accessToken, refreshToken, profile, done) => {
         try {
           const user = await User.findByFacebookUid(profile.id);
+          let displayname = user.firstname + " " + user.lastname;
           if (user) {
             return done(
               null,
               user,
-              req.flash("success", tranSuccess.login_success(user.displayname))
+              req.flash("success", tranSuccess.login_success(displayname))
             );
           }
           let newUserItem = {
-            displayname: profile.displayName,
             firstname: profile._json.first_name,
             lastname: profile._json.last_name,
             gender: profile.gender,
+            username: profile.emails[0].value.split("@")[0],
             local: { isActive: true },
             facebook: {
               uid: profile.id,
@@ -41,10 +42,11 @@ const initPassportFacebook = () => {
             },
           };
           const newUser = await User.createNew(newUserItem);
+          displayname = newUser.firstname + " " + newUser.lastname;
           return done(
             null,
             newUser,
-            req.flash("success", tranSuccess.login_success(newUser.displayname))
+            req.flash("success", tranSuccess.login_success(displayname))
           );
         } catch (error) {
           console.log({ error });
@@ -64,7 +66,7 @@ const initPassportFacebook = () => {
   });
   // Save req.user
   passport.deserializeUser((id, done) => {
-    User.findByUserId(id)
+    User.findUserNormalById(id)
       .then(user => done(null, user))
       .catch(error => done(error, null));
   });

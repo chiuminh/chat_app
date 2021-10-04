@@ -5,7 +5,14 @@ const adminPass = process.env.MAIL_PASSWORD;
 const mailHost = process.env.MAIL_HOST;
 const mailPort = process.env.MAIL_PORT;
 
-const mailer = (to, subject, htmlContent) => {
+/**
+ * Send message
+ * @param {string} to 
+ * @param {string} subject 
+ * @param {string[html]} htmlContent 
+ * @returns 
+ */
+const sendMail = (to, subject, htmlContent) => {
   let transporter = nodemailer.createTransport({
     host: mailHost,
     port: mailPort,
@@ -21,7 +28,7 @@ const mailer = (to, subject, htmlContent) => {
     subject: subject,
     html: htmlContent,
   };
-  return transporter.sendMail(mailOptions);
+  return transporter.sendMail(mailOptions); // promise
 };
 
-export default mailer;
+export default sendMail;

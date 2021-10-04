@@ -1,10 +1,14 @@
 import express from "express";
 import path from "path";
+import cors from "cors";
+import logger from '../src/app/middleware/logger'
 import flash from "connect-flash";
 import connectDB from "./config/connectDB";
 import configSession from "./config/configSession";
 import initRoutes from "./routes/index";
 import passport from "passport";
+import 'colors'
+
 
 const app = express();
 
@@ -15,6 +19,7 @@ connectDB();
 configSession(app);
 
 // Enable post data for request
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Config view engine
@@ -29,12 +34,16 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Logger
+app.use(logger)
+
 // init all routes
 app.use(express.json());
 initRoutes(app);
 
-app.listen(process.env.APP_PORT, () =>
-  console.log(`App listening at http://localhost:${process.env.APP_PORT}`)
+// Listen port
+app.listen(8989, () =>
+  console.log(`App listening at http://localhost:${8989}`.bold.gray)
 );
 
 /**

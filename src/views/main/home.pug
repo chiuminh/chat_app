@@ -1,0 +1,18 @@
+extends ../layout/main-layout 
+block content
+    if success.length 
+        +alertifySuccess(success)
+    +createPostForm(user)
+    .post__container 
+    +createPostModal(user)
+
+block scripts
+    script(src="/js/posts/loadPosts.js")
+    script(src="/js/posts/createPost.js")
+    script(src="/js/posts/likePost.js")
+    script(src="/js/posts/retweetPost.js")
+    script(src="/js/posts/replyPost.js")
+    script(src="/js/posts/deletePost.js")
+    script(src="/js/helpers/post.js")
+    script(src="/js/helpers/common.js")
+    

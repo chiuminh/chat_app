@@ -1,0 +1,22 @@
+extends ../layout/main-layout 
+block content
+    //- if success.length 
+    //-     +alertifySuccess(success)
+    if !profileUser 
+        span.error_messagee Xin lỗi, chúng tôi không thầy đường dẫn(URL) của bạn. Hãy thử kiểm tra lại.
+    else 
+        script.
+            var profileUserId= '!{profileUser._id}';
+            var selectedTab= '!{selectedTab}';
+        
+        .tabs-container 
+            +createTab('Following', `/profile/${profileUser.username}/following`, selectedTab == 'following')
+            +createTab('Followers', `/profile/${profileUser.username}/followers`, selectedTab == 'followers')
+
+        .results-container 
+          
+block scripts
+    script(src="/js/users/follow.js") 
+    script(src="/js/users/followersAndFollowing.js") 
+    script(src="/js/helpers/user.js") 
+    script(src="/js/helpers/common.js") 

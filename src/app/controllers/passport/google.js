@@ -20,17 +20,19 @@ function initPassportGoogle() {
       async (req, accessToken, refreshToken, profile, done) => {
         try {
           const user = await User.findByGoogleUid(profile.id);
+          let displayname = user.firstname + " " + user.lastname;
+
           if (user) {
             return done(
               null,
               user,
-              req.flash("success", tranSuccess.login_success(user.displayname))
+              req.flash("success", tranSuccess.login_success(displayname))
             );
           }
           let newUserItem = {
-            displayname: profile.displayName,
             firstname: profile.name.familyName,
             lastname: profile.name.givenName,
+            username: profile.emails[0].value.split("@")[0],
             local: { isActive: true },
             google: {
               uid: profile.id,
@@ -40,10 +42,11 @@ function initPassportGoogle() {
           };
 
           const newUser = await User.createNew(newUserItem);
+          displayname = newUser.firstname + " " + newUser.lastname;
           return done(
             null,
             newUser,
-            req.flash("success", tranSuccess.login_success(newUser.displayname))
+            req.flash("success", tranSuccess.login_success(displayname))
           );
         } catch (error) {
           console.log({ error });

@@ -3,14 +3,11 @@ block content
     a(href="/register").switch
         | Sign Up
     h1.title Đăng nhập
-    if errors.length
-        .alert.alert-danger
-            span.message= errors
-            i.fas.fa-times  
-    if success.length
-        .alert.alert-success
-            span.message= success
-            i.fas.fa-times  
+    if success.length 
+        +alertSuccess(success)
+    if errors.length 
+        +alertError(errors)
+
     form#login.form(method="POST")
         // add class: invalid if error else valid
         -var invalidEmail = errorMessages && errorMessages['email'] ? 'invalid':''

@@ -8,7 +8,8 @@
     "dev": "nodemon --exec babel-node ./src/server.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel ./src -d ./build/src",
-    "build": "npm run clean && npm run build-babel"
+    "build": "npm run clean && npm run build-babel",
+    "scsstocss": "node-sass --watch ./src/views/scss/main.scss ./src/public/assets/css/configmain.css"
   },
   "dependencies": {
     "@babel/cli": "^7.14.8",
@@ -20,9 +21,11 @@
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.5.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.3",
     "nodemailer": "^6.6.3",
     "passport": "^0.4.1",
@@ -33,6 +36,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "colors": "^1.4.0",
+    "node-sass": "^6.0.1",
     "nodemon": "^2.0.12",
     "pem": "^1.14.4"
   }

@@ -1,3 +1,8 @@
+:root {
+  --blue: #1fa2f1;
+  --mainBg: #d4edff;
+  --width-btn-box: 220px;
+}
 * {
   margin: 0;
   padding: 0;
@@ -7,12 +12,26 @@ html {
   font-family: sans-serif;
   font-size: 16px;
 }
+
+.fz-md {
+  font-size: 16px !important;
+}
+.text-dark {
+  color: rgb(29, 21, 21) !important;
+}
+.text-primary {
+  color: var(--blue) !important;
+}
+.fz-lg {
+  font-size: 20px !important;
+}
+
 .hero {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: rgb(147, 204, 204);
+  background: var(--mainBg);
 }
 .form-box {
   width: 380px;
@@ -22,24 +41,31 @@ html {
   overflow: hidden;
   border-radius: 4px;
 }
-:root {
-  --width-btn-box: 220px;
+.form {
+  position: absolute;
+  width: 100%;
+  padding: 24px;
+  transition: 0.4s;
+}
+
+#register {
+  /* transform: translateX(450px); */
+}
+
+#forgotPassword {
+  /* transform: translateX(450px); */
 }
 
 .button-box-bottom {
-  width: var(--width-btn-box);
-  box-shadow: 0 0 20px 9px rgba(150, 189, 189, 0.3);
   border-radius: 30px;
   display: flex;
   justify-content: center;
   height: 34px;
   text-align: center;
   transition: 0.4s;
-
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 20px;
+  z-index: 12;
 }
 
 .toggle-btn {
@@ -63,7 +89,7 @@ html {
   top: 0;
   left: 0;
   height: 100%;
-  background: rgb(155, 255, 131);
+  background: var(--blue);
   border-radius: 30px;
   transform: translateX(0);
   transition: 0.5s;
@@ -75,7 +101,12 @@ html {
 #btn-back {
   color: white;
   border-radius: 30px;
-  background: #000;
+  background: #656565;
+  font-size: 12px;
+  padding: 8px 12px;
+  margin: 0;
+  margin-left: 12px;
+  cursor: pointer;
   transition: 0.4s;
 }
 #btn-forgot-password,
@@ -83,12 +114,17 @@ html {
   width: 100%;
   transition: width 0.4s;
 }
+
+#btn-back:hover {
+  background-color: #383636;
+}
+
 .social-icons {
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 46px;
+  bottom: 20px;
 }
 .social-icons a {
   width: 34px;
@@ -98,7 +134,7 @@ html {
   align-items: center;
   border-radius: 50%;
   text-decoration: none;
-  border: 1px solid rgb(155, 255, 131);
+  border: 1px solid var(--blue);
   margin: 0 8px;
   transition: 0.4s;
   font-size: 16px;
@@ -118,13 +154,6 @@ html {
 }
 #login-google:hover {
   background: #cf4034;
-}
-
-.form {
-  position: absolute;
-  width: 100%;
-  padding: 20px;
-  transition: 0.4s;
 }
 
 .input-group-row {
@@ -149,10 +178,10 @@ html {
 }
 
 .input-group.valid label {
-  color: #22bb33;
+  color: var(--blue);
 }
 .input-group.valid .input-field {
-  border-color: #22bb33;
+  border-color: var(--blue);
 }
 .invalid .message {
   font-size: 14px;
@@ -177,7 +206,7 @@ html {
 }
 .submit-btn {
   font-size: 14px;
-  background: rgb(155, 255, 131);
+  background: var(--blue);
   color: rgb(75, 36, 36);
   cursor: pointer;
   border: 0;
@@ -190,18 +219,10 @@ html {
   text-decoration: none;
 }
 .submit-btn:hover {
-  background: rgba(155, 255, 131, 0.8);
+  background: var(--mainBg);
   color: #1b1b1b;
 }
 
-#register {
-  /* transform: translateX(450px); */
-  padding-top: 20px;
-}
-
-#forgotPassword {
-  /* transform: translateX(450px); */
-}
 label {
   color: #5f5f5f;
 }
@@ -219,16 +240,31 @@ label {
 }
 .switch {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
+  /* bottom: 20px; */
+  /* left: 50%; */
   transition: auto;
-  transform: translateX(-50%);
+  /* transform: translateX(-50%); */
+  right: 0;
+  background: var(--blue);
+  color: #f3f3f3;
+  padding: 4px;
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 4px 8px;
+  margin: 8px;
+  font-size: 12px;
+  transition: 0.4s;
+  background-color: rgb(22, 98, 197);
+}
+.switch:hover {
+  background-color: var(--mainBg);
+  color: var(--blue);
 }
 .title {
   text-align: center;
   padding-top: 20px;
-  color: rgb(49 255 0);
-  font-size: 30px;
+  color: var(--blue);
+  font-size: 26px;
   margin-bottom: 4px;
 }
 /* ********************* ALERT **************************** */
@@ -290,9 +326,42 @@ label {
 }
 
 .alert.alert-success i:hover {
-  color: #73d68a;
+  color: var(--blue);
 }
 .master-success-message {
   display: none;
 }
 /* **************************************************** */
+.sent-forgot-password {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  padding: 40px;
+}
+
+.sent-forgot-password p.message {
+  color: red;
+  text-align: center;
+  transform: translateY(-34px);
+}
+
+.switch-login {
+  display: inline-block;
+  padding: 8px;
+  background: #5a5a5a;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.4s;
+}
+.switch-login:hover {
+  background: var(--mainBg);
+  color: #1b1b1b;
+}
+.expire-link-reset-password {
+  border-radius: 50%;
+  color: rgb(2, 2, 2);
+  margin: 8px;
+}
