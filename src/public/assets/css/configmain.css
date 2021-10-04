@@ -223,9 +223,21 @@ nav a {
   width: 128px;
   position: absolute;
   bottom: -64px;
-  margin-left: 15px; }
+  margin-left: 15px;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
   .profile__header-container .user__image-container img {
     border: 4px solid white; }
+  .profile__header-container .user__image-container button {
+    position: absolute;
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.4);
+    display: none;
+    transition: 0.3s; }
+  .profile__header-container .user__image-container:hover .profile__picture-button {
+    display: block; }
 
 .profile__header-container .profile__buttons-container {
   padding: 15px;
@@ -308,3 +320,15 @@ nav a {
     .user__details-container a {
       font-weight: bold;
       color: #2b2121; }
+
+.image-preview__container {
+  margin: 8px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 400px;
+  max-height: 400px; }
+
+#imagePreview {
+  width: 100%;
+  display: block;
+  max-width: 100%; }

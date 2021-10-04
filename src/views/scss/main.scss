@@ -314,9 +314,25 @@ nav {
     position: absolute;
     bottom: (-128/2) * 1px;
     margin-left: $spacing;
+    transition: 0.3s;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       border: 4px solid white;
+    }
+
+    button {
+      position: absolute;
+      font-size: 40px;
+      color: rgba($color: #000000, $alpha: 0.4);
+      display: none;
+      transition: 0.3s;
+    }
+
+    &:hover .profile__picture-button {
+      display: block;
     }
   }
 
@@ -421,4 +437,17 @@ nav {
       color: rgb(43, 33, 33);
     }
   }
+}
+
+.image-preview__container {
+  margin: 8px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 400px;
+  max-height: 400px;
+}
+#imagePreview {
+  width: 100%;
+  display: block;
+  max-width: 100%;
 }
