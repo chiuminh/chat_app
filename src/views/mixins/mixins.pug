@@ -45,12 +45,32 @@ mixin createPostModal(userLoggedIn)
     +createReplyModal(userLoggedIn)
     +createDeletePostModal()
 
+
 mixin createFollowButton(user, isFollowing)
     -var text = isFollowing ? "Following" : "Folllow"
     -var buttonClass = isFollowing ? "follow-button following" : "follow-button"
     button(class=buttonClass, data-user=user._id)= text 
 
+
 mixin createTab(name, href, isSelected)
     -var className = isSelected ? "tab active" : "tab"
     a(href= href, class= className) 
         span= name
+
+
+mixin createImageUploadModal()
+    #imageUploadModal.modal.fade(tabindex='-1', aria-labelledby='imageUploadModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#imageUploadModalLabel.modal-title Xóa bài viết?
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    input#filePhoto(type="file", name="filePhoto")
+                
+                    .image-preview__container 
+                        img#imagePreview
+                .modal-footer
+                    button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
+                    button#submitImageUpload.btn.btn-primary(type='button') Lưu
+

@@ -1,7 +1,5 @@
 extends ../layout/main-layout 
 block content
-    //- if success.length 
-    //-     +alertifySuccess(success)
     if !profileUser 
         span.error_messagee Xin lỗi, chúng tôi không thầy đường dẫn(URL) của bạn. Hãy thử kiểm tra lại.
     else 
@@ -13,6 +11,10 @@ block content
             .cover__photo-container 
                 .user__image-container
                     img(src="/assets/images/users/"+profileUser.profilePic, alt="User profile image")
+                    if profileUser._id.toString() === user._id.toString()
+                        button.profile__picture-button(data-bs-toggle="modal", data-bs-target="#imageUploadModal")
+                            i.fas.fa-camera
+                            
             .profile__buttons-container 
                 - if (profileUser._id.toString() != user._id.toString())
                     a.profile__button(href=`/messages/${profileUser._id}`) 
@@ -44,8 +46,10 @@ block content
         .post__container 
 
         +createPostModal(user)
+        +createImageUploadModal()
 
 block scripts
+    script(src="/js/profile/imageUpload.js") 
     script(src="/js/profile/loadPosts.js") 
     script(src="/js/profile/loadReplies.js") 
     script(src="/js/profile/index.js") 
