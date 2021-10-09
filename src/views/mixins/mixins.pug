@@ -63,13 +63,13 @@ mixin createImageUploadModal()
         .modal-dialog
             .modal-content
                 .modal-header
-                    h5#imageUploadModalLabel.modal-title Xóa bài viết?
+                    h5#imageUploadModalLabel.modal-title.text-center Thay đổi ảnh đại diện
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
                     input#filePhoto(type="file", name="filePhoto")
                 
                     .image-preview__container 
-                        img#imagePreview
+                        
                 .modal-footer
                     button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
                     button#submitImageUpload.btn.btn-primary(type='button') Lưu

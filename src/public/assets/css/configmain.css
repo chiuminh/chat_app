@@ -233,7 +233,7 @@ nav a {
   .profile__header-container .user__image-container button {
     position: absolute;
     font-size: 40px;
-    color: rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.8);
     display: none;
     transition: 0.3s; }
   .profile__header-container .user__image-container:hover .profile__picture-button {
@@ -326,7 +326,8 @@ nav a {
   border-radius: 8px;
   overflow: hidden;
   max-width: 400px;
-  max-height: 400px; }
+  max-height: 400px;
+  color: white !important; }
 
 #imagePreview {
   width: 100%;

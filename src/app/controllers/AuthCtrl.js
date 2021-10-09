@@ -3,7 +3,6 @@ import AuthService from "../services/AuthService";
 import { validate, registerSchema } from "../../validate";
 
 class AuthCtrl {
-
   // [POST] /register
   async postRegister(req, res) {
     // Validate data from clients
@@ -82,3 +81,4 @@ class AuthCtrl {
   }
 }
 export default new AuthCtrl();
+
