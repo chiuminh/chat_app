@@ -6,7 +6,7 @@ class AuthCtrl {
   // [POST] /register
   async postRegister(req, res) {
     // Validate data from clients
-    const { error } = validate(req.body, registerSchema);
+    const { value, error } = validate(req.body, registerSchema);
     if (error) {
       let payload = req.body;
       payload.errorMessages = {};

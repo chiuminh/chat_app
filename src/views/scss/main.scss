@@ -302,12 +302,35 @@ nav {
 }
 
 .profile__header-container {
-  .cover__photo-container {
-    height: 180px;
+  .cover-photo__section {
+    height: 200px;
     background-color: $blue;
     position: relative;
-  }
 
+    button {
+      position: absolute;
+      font-size: 40px;
+      color: rgba($color: #000000, $alpha: 0.8);
+      display: none;
+      transition: 0.3s;
+    }
+  }
+  .cover-photo__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &:hover .cover-photo__button {
+      display: block;
+      font-size: 60px;
+    }
+  }
   .user__image-container {
     height: 128px;
     width: 128px;
@@ -321,14 +344,6 @@ nav {
     align-items: center;
     img {
       border: 4px solid white;
-    }
-
-    button {
-      position: absolute;
-      font-size: 40px;
-      color: rgba($color: #000000, $alpha: 0.8);
-      display: none;
-      transition: 0.3s;
     }
 
     &:hover .profile__picture-button {
@@ -447,7 +462,8 @@ nav {
   max-height: 400px;
   color: white !important;
 }
-#imagePreview {
+#imagePreview,
+#coverPreview {
   width: 100%;
   display: block;
   max-width: 100%;

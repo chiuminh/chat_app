@@ -1,7 +1,7 @@
 mixin createPostForm(userLoggedIn)
     .post__form-container
         .user__image-container
-            img(src=`/assets/images/users/${userLoggedIn.profilePic}`, alt="User's profile picture")
+            img(src=`/assets/images/users/profilePics/${userLoggedIn.profilePic}`, alt="User's profile picture")
         .textarea__container
             textarea#postTextarea(placeholder="What's happending?")
             .buttons__container
@@ -19,7 +19,7 @@ mixin createReplyModal(userLoggedIn)
                     #originalPostContainer
                     .post__form-container
                         .user__image-container
-                            img(src=`/assets/images/users/${userLoggedIn.profilePic}`, alt="User's profile picture")
+                            img(src=`/assets/images/users/profilePics/${userLoggedIn.profilePic}`, alt="User's profile picture")
                         .textarea__container
                             textarea#replyTextarea(placeholder="What's happending?")
                 .modal-footer
@@ -73,4 +73,21 @@ mixin createImageUploadModal()
                 .modal-footer
                     button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
                     button#submitImageUpload.btn.btn-primary(type='button') Lưu
+
+
+mixin createCoverPhotoUploadModal()
+    #coverPhotoUploadModal.modal.fade(tabindex='-1', aria-labelledby='coverPhotoModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#coverPhotoModalLabel.modal-title.text-center Thay đổi ảnh bìa
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    input#coverPhoto(type="file", name="filePhoto")
+                
+                    .cover-preview__container 
+                        
+                .modal-footer
+                    button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
+                    button#submitCoverPhoto.btn.btn-primary(type='button') Lưu
 

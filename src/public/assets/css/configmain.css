@@ -213,10 +213,30 @@ nav a {
 .error_message {
   padding: 15px; }
 
-.profile__header-container .cover__photo-container {
-  height: 180px;
+.profile__header-container .cover-photo__section {
+  height: 200px;
   background-color: #1fa2f1;
   position: relative; }
+  .profile__header-container .cover-photo__section button {
+    position: absolute;
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.8);
+    display: none;
+    transition: 0.3s; }
+
+.profile__header-container .cover-photo__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .profile__header-container .cover-photo__container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .profile__header-container .cover-photo__container:hover .cover-photo__button {
+    display: block;
+    font-size: 60px; }
 
 .profile__header-container .user__image-container {
   height: 128px;
@@ -230,12 +250,6 @@ nav a {
   align-items: center; }
   .profile__header-container .user__image-container img {
     border: 4px solid white; }
-  .profile__header-container .user__image-container button {
-    position: absolute;
-    font-size: 40px;
-    color: rgba(0, 0, 0, 0.8);
-    display: none;
-    transition: 0.3s; }
   .profile__header-container .user__image-container:hover .profile__picture-button {
     display: block; }
 
@@ -329,7 +343,8 @@ nav a {
   max-height: 400px;
   color: white !important; }
 
-#imagePreview {
+#imagePreview,
+#coverPreview {
   width: 100%;
   display: block;
   max-width: 100%; }

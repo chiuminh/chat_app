@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "colors": "^1.4.0",
+    "morgan": "^1.10.0",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.12",
     "pem": "^1.14.4"
