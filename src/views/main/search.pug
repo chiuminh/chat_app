@@ -1,0 +1,12 @@
+extends ../layout/main-layout 
+block content
+    .search 
+        .search__container
+            input#searchUser(type="text" placeholder="Enter name or post...")
+            button#searchButton 
+                i.fas.fa-search 
+        .search__result 
+
+block scripts
+    script(src="/js/search/index.js") 
+    script(src="/js/helpers/common.js") 

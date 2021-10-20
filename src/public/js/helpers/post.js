@@ -51,12 +51,26 @@ function createPostHtml(post) {
                 </div>`
   }
 
-  let buttonDeletePost = ''
+  let buttons = ''
   let isDisabled = false
+  let pinnedPostText = ''
+  let dataTarget = '#confirmPinModal'
   if (userLoggedIn._id === postedBy._id) {
-    buttonDeletePost = `<button class="button__open-modal--delete" data-bs-toggle="modal" data-bs-target="#deletePostModal" data-id="${post._id}">
-                          <i class="remove-pointer-events fas fa-times"></i>
-                        </button>`
+    let pinnedClass = ''
+    if (post.pinned) {
+      pinnedClass = 'active'
+      dataTarget = '#unpinModal'
+      pinnedPostText = `<i class="fas fa-thumbtack"></i> <span>Pinned post</span>`
+    }
+    buttons = `
+        <button class="pin-button ${pinnedClass} button__open-modal--pin" data-bs-toggle="modal" data-bs-target="${dataTarget}" data-id="${post._id}">
+          <i class="remove-pointer-events fas fa-thumbtack"></i>
+        </button>
+        <button class="button__open-modal--delete" data-bs-toggle="modal" data-bs-target="#deletePostModal" data-id="${post._id}">
+          <i class="remove-pointer-events fas fa-times"></i>
+        </button>
+      `
+
     isDisabled = true
   }
   return `
@@ -69,13 +83,14 @@ function createPostHtml(post) {
             }" alt="User's profile picture" />
           </div>
           <div class="post__content-container">
+            <div class="pinned-post__text">${pinnedPostText}</div>
             <div class="post__header">
               <a class="displayName" href="/profile/${
                 postedBy.username
               }">${displayname}</a>
               <span class="username">@${postedBy.username}</span>
               <span class="date">${timestamp}</span>
-              ${buttonDeletePost}
+              ${buttons}
             </div>
             ${replyFlag}
             <div class="post__body">
