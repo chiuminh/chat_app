@@ -140,6 +140,11 @@ router
         delete searchObj.isReply
       }
 
+      if (searchObj.search) {
+        searchObj.content = { $regex: searchObj.search, $options: 'i' }
+        delete searchObj.search
+      }
+
       if (searchObj.followingOnly !== undefined) {
         let followingOnly = searchObj.followingOnly == 'true'
 

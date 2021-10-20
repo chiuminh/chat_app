@@ -1,12 +1,21 @@
 extends ../layout/main-layout 
 block content
-    .search 
-        .search__container
-            input#searchUser(type="text" placeholder="Enter name or post...")
-            button#searchButton 
-                i.fas.fa-search 
-        .search__result 
+    .search-box
+        input#searchInput(type="text", data-search=selectedTab,  placeholder="Enter name or post...")
+        button#searchButton 
+            i.fas.fa-search 
+    .tabs-container 
+        +createTab('Posts', `/search/posts`, selectedTab != 'users')
+        +createTab('Users', `/search/users`, selectedTab == 'users')
 
+    .results-container 
+        
+    +createPostModal(user)
 block scripts
-    script(src="/js/search/index.js") 
-    script(src="/js/helpers/common.js") 
+    script(src="/js/search.js") 
+    script(src="/js/helpers/user.js") 
+    script(src="/js/helpers/post.js") 
+    script(src="/js/helpers/common.js")
+    //- Bug: [USER] follow and unfollow
+    //- Bug: [POSTS] like/unlike, reply, pin and delete post
+
