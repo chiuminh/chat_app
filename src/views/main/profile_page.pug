@@ -8,9 +8,18 @@ block content
             var selectedTab= '!{selectedTab}';
 
         .profile__header-container 
-            .cover__photo-container 
+            .cover-photo__section
+                .cover-photo__container 
+                    if profileUser.coverPhoto
+                        img(src="/assets/images/users/coverPhotos/"+profileUser.coverPhoto, alt="User's cover photo")
+
+                    if profileUser._id.toString() === user._id.toString()
+                        button.cover-photo__button(data-bs-toggle="modal", data-bs-target="#coverPhotoUploadModal")
+                            i.fas.fa-camera
+                    
                 .user__image-container
-                    img(src="/assets/images/users/"+profileUser.profilePic, alt="User profile image")
+                    img(src="/assets/images/users/profilePics/"+profileUser.profilePic, alt="User profile image")
+                    
                     if profileUser._id.toString() === user._id.toString()
                         button.profile__picture-button(data-bs-toggle="modal", data-bs-target="#imageUploadModal")
                             i.fas.fa-camera
@@ -47,6 +56,7 @@ block content
 
         +createPostModal(user)
         +createImageUploadModal()
+        +createCoverPhotoUploadModal()
 
 block scripts
     script(src="/js/profile/imageUpload.js") 

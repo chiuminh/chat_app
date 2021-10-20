@@ -1,50 +1,49 @@
-import express from "express";
-import path from "path";
-import cors from "cors";
+import express from 'express'
+import path from 'path'
+import cors from 'cors'
 import logger from '../src/app/middleware/logger'
-import flash from "connect-flash";
-import connectDB from "./config/connectDB";
-import configSession from "./config/configSession";
-import initRoutes from "./routes/index";
-import passport from "passport";
+import flash from 'connect-flash'
+import connectDB from './config/connectDB'
+import configSession from './config/configSession'
+import initRoutes from './routes/index'
+import passport from 'passport'
 import 'colors'
+import morgan from 'morgan'
 
-
-const app = express();
+const app = express()
 
 // Connect db
-connectDB();
+connectDB()
 
 // Config session
-configSession(app);
+configSession(app)
 
 // Enable post data for request
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
+// app.use(morgan("dev"));
 // Config view engine
-app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
 
 // Enable flash message
-app.use(flash());
+app.use(flash())
 
 // init passport
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Logger
-app.use(logger)
 
 // init all routes
-app.use(express.json());
-initRoutes(app);
+app.use(express.json())
+initRoutes(app)
 
 // Listen port
 app.listen(8989, () =>
   console.log(`App listening at http://localhost:${8989}`.bold.gray)
-);
+)
 
 /**
  * 
