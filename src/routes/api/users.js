@@ -9,16 +9,20 @@ const router = new Router()
 // Get users
 // [PUT] api/users/:userId/follow
 router.get('/', async (req, res) => {
-  let { keyword } = req.query
-  let users = await User.find({
-    $or: [
-      { firstname: { $regex: new RegExp(keyword, 'i') } },
-      { lastname: { $regex: new RegExp(keyword, 'i') } },
-    ],
-  })
+  let searchObj = req.query
+  if (searchObj.search) {
+    searchObj = {
+      $or: [
+        { firstname: { $regex: new RegExp(searchObj.search, 'i') } },
+        { lastname: { $regex: new RegExp(searchObj.search, 'i') } },
+        { username: { $regex: new RegExp(searchObj.search, 'i') } },
+      ],
+    }
+  }
+  let users = await User.find(searchObj)
   res.status(200).send({
     success: true,
-    data: users,
+    users,
   })
 })
 

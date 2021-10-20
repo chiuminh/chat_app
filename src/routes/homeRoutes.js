@@ -9,13 +9,12 @@ import * as auth from '../app/middleware/auth'
 import passport from 'passport'
 import initPassportFacebook from '../app/controllers/passport/facebook'
 import initPassportGoogle from '../app/controllers/passport/google'
+import SearchCtrl from '../app/controllers/SearchCtrl'
 
 // init all passport
 initPassportLocal()
 initPassportFacebook()
 initPassportGoogle()
-
-router.get('/search', auth.requireLoggedIn, HomeCtrl.getSearchPage)
 
 // Login with google
 router.get(

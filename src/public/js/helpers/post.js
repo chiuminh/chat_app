@@ -12,12 +12,7 @@ function createPostHtml(post) {
   post = isRetweet ? post.retweetData : post
 
   const { postedBy } = post
-  if (!postedBy._id) {
-    alertify.notify(
-      'Xin lỗi bạn, Bài viết nãy đã không còn tồn tại.',
-      'error',
-      6
-    )
+  if (!postedBy) {
     return
   }
 

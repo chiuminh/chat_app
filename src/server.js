@@ -5,7 +5,7 @@ import logger from '../src/app/middleware/logger'
 import flash from 'connect-flash'
 import connectDB from './config/connectDB'
 import configSession from './config/configSession'
-import initRoutes from './routes/index'
+import initRoutes from './routes/_index'
 import passport from 'passport'
 import 'colors'
 import morgan from 'morgan'
@@ -21,7 +21,10 @@ configSession(app)
 // Enable post data for request
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
-// app.use(morgan("dev"));
+
+// Show log
+app.use(morgan('dev'))
+
 // Config view engine
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
