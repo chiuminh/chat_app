@@ -5,6 +5,23 @@ import multer from 'multer'
 import fsExtra from 'fs-extra'
 
 const router = new Router()
+
+// Get users
+// [PUT] api/users/:userId/follow
+router.get('/', async (req, res) => {
+  let { keyword } = req.query
+  let users = await User.find({
+    $or: [
+      { firstname: { $regex: new RegExp(keyword, 'i') } },
+      { lastname: { $regex: new RegExp(keyword, 'i') } },
+    ],
+  })
+  res.status(200).send({
+    success: true,
+    data: users,
+  })
+})
+
 // Add or remove follow
 // [PUT] api/users/:userId/follow
 router.put('/:userId/follow', async (req, res) => {

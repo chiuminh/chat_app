@@ -41,9 +41,38 @@ mixin createDeletePostModal()
                     button#submitDeletePost.btn.btn-primary(type='button') Xóa
 
 
+mixin createPinnedPostModal()
+    #confirmPinModal.modal.fade(tabindex='-1', aria-labelledby='confirmPinModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#confirmPinModalLabel.modal-title Ghim bài viết này?
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    span Bài viết này sẽ xuất hiện đầu tiên trong bài viết của bạn.
+                .modal-footer
+                    button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
+                    button#pinPostButton.btn.btn-primary(type='button') Ghim
+
+mixin createUnPinPostModal()
+    #unpinModal.modal.fade(tabindex='-1', aria-labelledby='unpinModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#unpinModalLabel.modal-title Bỏ ghim bài viết?
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    span Bài viết đã ghim sẽ được bỏ.
+                .modal-footer
+                    button.btn.btn__cancel-delete--post(type='button', data-bs-dismiss='modal') Hủy
+                    button#unpinPostButton.btn.btn-primary(type='button') Xác nhận
+
+
 mixin createPostModal(userLoggedIn)
     +createReplyModal(userLoggedIn)
     +createDeletePostModal()
+    +createPinnedPostModal()
+    +createUnPinPostModal()
 
 
 mixin createFollowButton(user, isFollowing)

@@ -1,7 +1,7 @@
 extends ../layout/main-layout 
 block content
     if !profileUser 
-        span.error_messagee Xin lỗi, chúng tôi không thầy đường dẫn(URL) của bạn. Hãy thử kiểm tra lại.
+        span.error_messages Xin lỗi, chúng tôi không thầy đường dẫn(URL) của bạn. Hãy thử kiểm tra lại.
     else 
         script.
             var profileUserId= '!{profileUser._id}';
@@ -51,7 +51,8 @@ block content
         .tabs-container 
             +createTab('Posts', `/profile/${profileUser.username}`, selectedTab != 'replies')
             +createTab('Replies', `/profile/${profileUser.username}/replies`, selectedTab == 'replies')
-
+            
+        .post-pinned__container
         .post__container 
 
         +createPostModal(user)
@@ -63,6 +64,8 @@ block scripts
     script(src="/js/profile/loadPosts.js") 
     script(src="/js/profile/loadReplies.js") 
     script(src="/js/profile/index.js") 
+    script(src="/js/posts/deletePost.js") 
+    script(src="/js/posts/pinPost.js") 
     script(src="/js/users/follow.js") 
     script(src="/js/helpers/post.js") 
     script(src="/js/helpers/common.js") 
