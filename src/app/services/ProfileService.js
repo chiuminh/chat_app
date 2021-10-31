@@ -1,34 +1,30 @@
-import User from "../models/User";
+import User from '../models/User'
 
 class ProfileService {
   /**
-   * get payLoad 
-   * @param {string} username 
-   * @param {object} userLoggedIn 
-   * @returns 
+   * get payLoad
+   * @param {string} username
+   * @param {object} userLoggedIn
+   * @returns
    */
   async getPayLoad(username, userLoggedIn) {
-    try {
-      const user =
-        (await User.findByUsername(username)) ||
-        (await User.findUserNormalById(username));
-      if (user) {
-        return {
-          pageTitle: user.username,
-          user: userLoggedIn,
-          profileUser: user,
-          userLoggedInJs: JSON.stringify(userLoggedIn),
-        };
-      }
+    const user =
+      (await User.findByUsername(username)) ||
+      (await User.findUserNormalById(username))
+    if (user) {
       return {
-        pageTitle: "User not found",
+        pageTitle: user.username,
         user: userLoggedIn,
+        profileUser: user,
         userLoggedInJs: JSON.stringify(userLoggedIn),
-      };
-    } catch (error) {
-      console.log({ error });
+      }
+    }
+    return {
+      pageTitle: 'User not found',
+      user: userLoggedIn,
+      userLoggedInJs: JSON.stringify(userLoggedIn),
     }
   }
 }
 
-export default new ProfileService();
+export default new ProfileService()

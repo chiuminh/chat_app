@@ -30,7 +30,7 @@ html(lang="en")
                             i.fas.fa-search
                         a(href="/") 
                             i.far.fa-bell
-                        a(href="/") 
+                        a(href="/messages") 
                             i.far.fa-envelope
                         a(href="/profile") 
                             i.fas.fa-user
@@ -39,6 +39,9 @@ html(lang="en")
                 .main__section-container.col-10.col-md-8.px-0
                     div.title__container 
                         h1 #{pageTitle}
+
+                        block headerButton
+
                     block content
                 .d-none.d-md-block.col-md-2
                     span Third column 

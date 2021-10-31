@@ -104,12 +104,23 @@ nav {
     display: flex;
     justify-content: space-between;
     flex-shrink: 0;
+    align-items: center;
 
     h1 {
       flex: 1;
       font-size: 18px;
       font-weight: 800;
       margin: 0;
+    }
+
+    a {
+      color: $greyText;
+      font-size: 20px;
+      transition: .4s;
+      
+      &:hover {
+        color: $blueLight;
+      }
     }
   }
   .post__form-container {

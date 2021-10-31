@@ -1,0 +1,15 @@
+extends ../layout/main-layout 
+block content
+    .chat
+        .chat__title-bar
+            label(for="userSearchTextbox") To:
+            #selectedUsers
+                input#userSearchTextbox(type="text", placeholder="Type the name of the person")
+
+        .results-container
+        
+        button#createChatButton(disabled) Tạo nhóm
+    +createPostModal(user)
+block scripts
+
+
